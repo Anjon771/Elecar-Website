@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Elecar luxury electric vehicle showroom and configurator featuring Porsche, Tesla, and Audi performance models.">
+    <meta property="og:title" content="Elecar - Luxury Electric Vehicle Showroom">
+    <meta property="og:description" content="Explore, compare, and reserve high-performance electric vehicles engineered with 800V architecture.">
+
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!--=============== GOOGLE FONTS (2+1 Rule: Syne + Plus Jakarta Sans + JetBrains Mono) ===============-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!--=============== REMIX ICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <title>Elecar - Luxury Electric Vehicle Showroom</title>
+</head>
+<body>
+    <!--==================== HEADER (Strict 3-Zone Top Bar Contract) ====================-->
+    <header class="header" id="header">
+        <div class="header__inner container">
+            <!-- Zone 1: Single text element wordmark -->
+            <a href="#home" class="brand-wordmark">Elecar</a>
+
+            <!-- Zone 2: 4-5 clean text navigation links -->
+            <nav class="nav-menu" id="nav-menu" aria-label="Primary Navigation">
+                <a href="#home" class="nav-link active-link">Overview</a>
+                <a href="#fleet" class="nav-link">Showroom</a>
+                <a href="#architecture" class="nav-link">Architecture</a>
+                <a href="#porsche-lineup" class="nav-link">Porsche Lineup</a>
+                <a href="#consultation" class="nav-link">Private Client</a>
+                <button type="button" class="nav-close" id="nav-close" aria-label="Close navigation menu">
+                    <i class="ri-close-line"></i>
+                </button>
+            </nav>
+
+            <!-- Zone 3: 1-2 primary actions -->
+            <div class="header__actions">
+                <button type="button" class="btn-secondary header__garage-btn" id="open-garage-btn" aria-label="View saved reservations">
+                    <span>Garage</span>
+                    <span class="garage-count tabular-nums" id="garage-count">0</span>
+                </button>
+                <a href="#consultation" class="btn-primary">Book Test Drive</a>
+                <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu">
+                    <i class="ri-menu-4-line"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!--==================== MAIN ====================-->
+    <main class="main">
+        <!--==================== 1. HERO SECTION ====================-->
+        <section class="hero section" id="home">
+            <div class="container hero__grid">
+                <div class="hero__content">
+                    <p class="editorial-kicker">Stuttgart &amp; Zurich Flagship Delivery · 800V Performance Fleet</p>
+                    <h1 class="hero__title">
+                        Precision Electric Grand Touring.
+                    </h1>
+                    <p class="hero__description">
+                        Experience zero-emission grand touring engineered around silicon-carbide 800-volt propulsion, active aerodynamic vectoring, and direct European factory allocation.
+                    </p>
+
+                    <!-- Interactive Drive Profile Selector -->
+                    <div class="drive-mode-bar" role="group" aria-label="Select telemetry drive mode">
+                        <button type="button" class="drive-mode-btn active" data-mode="gt">
+                            Range GT Mode
+                        </button>
+                        <button type="button" class="drive-mode-btn" data-mode="sport">
+                            Sport Plus
+                        </button>
+                        <button type="button" class="drive-mode-btn" data-mode="track">
+                            Track Endurance
+                        </button>
+                    </div>
+
+                    <!-- Primary Decision Block -->
+                    <div class="hero__cta-group">
+                        <button type="button" class="btn-primary btn-lg" id="hero-configure-btn" data-car-id="mission-e">
+                            Configure Porsche Mission E
+                        </button>
+                        <a href="#fleet" class="btn-outline btn-lg">
+                            Explore Full Fleet
+                        </a>
+                    </div>
+
+                    <!-- Unboxed Tabular Telemetry Bar -->
+                    <div class="hero__telemetry">
+                        <div class="telemetry-item">
+                            <span class="telemetry-label">Battery Thermal State</span>
+                            <strong class="telemetry-value tabular-nums" id="telemetry-temp">24.0°C</strong>
+                            <span class="telemetry-sub" id="telemetry-temp-note">Optimal cell window</span>
+                        </div>
+                        <div class="telemetry-item">
+                            <span class="telemetry-label">WLTP Combined Range</span>
+                            <strong class="telemetry-value tabular-nums" id="telemetry-range">873 km</strong>
+                            <span class="telemetry-sub" id="telemetry-range-note">Long-range dual pack</span>
+                        </div>
+                        <div class="telemetry-item">
+                            <span class="telemetry-label">State of Charge</span>
+                            <strong class="telemetry-value tabular-nums" id="telemetry-soc">94%</strong>
+                            <span class="telemetry-sub" id="telemetry-soc-note">350 kW DC fast ready</span>
+                        </div>
+                        <div class="telemetry-item">
+                            <span class="telemetry-label">0–100 km/h Sprint</span>
+                            <strong class="telemetry-value tabular-nums" id="telemetry-accel">2.8 s</strong>
+                            <span class="telemetry-sub" id="telemetry-accel-note">Launch control active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero__visual">
+                    <div class="hero__stage">
+                        <div class="hero__stage-header">
+                            <div>
+                                <p class="stage-model-brand">Porsche Concept Study</p>
+                                <h2 class="stage-model-name" id="hero-car-name">Mission E Cross Turismo</h2>
+                            </div>
+                            <div class="stage-price-block">
+                                <span class="stage-price-label">Direct Allocation From</span>
+                                <strong class="stage-price-value tabular-nums" id="hero-car-price">$184,500</strong>
+                            </div>
+                        </div>
+
+                        <div class="hero__img-wrapper">
+                            <img src="assets/img/home.png" alt="Porsche Mission E Electric Grand Tourer" class="hero__img" id="hero-car-img" referrerpolicy="no-referrer">
+                        </div>
+
+                        <div class="hero__stage-footer">
+                            <div class="unboxed-meta">
+                                <span>Dual-Motor All-Wheel Drive</span>
+                                <span aria-hidden="true">·</span>
+                                <span>560 kW (761 PS)</span>
+                                <span aria-hidden="true">·</span>
+                                <span>2-Speed Rear Transaxle</span>
+                            </div>
+                            <button type="button" class="text-action-btn" id="hero-specs-btn" data-car-id="mission-e">
+                                Inspect Technical Dossier <i class="ri-arrow-right-up-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== 2. FEATURED LUXURY FLEET (Interactive Showroom) ====================-->
+        <section class="fleet section" id="fleet">
+            <div class="container">
+                <div class="section-header-row">
+                    <div>
+                        <p class="editorial-kicker">01. Curated Showroom Inventory</p>
+                        <h2 class="section-title">Featured Luxury Electric Fleet</h2>
+                    </div>
+                    <p class="section-subtitle">
+                        Every vehicle includes a 112-point high-voltage battery health certificate, home wallbox installation, and European concierge delivery.
+                    </p>
+                </div>
+
+                <!-- Interactive Filter & Sort Controls -->
+                <div class="catalog-toolbar">
+                    <div class="segmented-filters" role="tablist" aria-label="Filter vehicles by manufacturer">
+                        <button type="button" class="filter-tab active" data-filter="all" role="tab" aria-selected="true">
+                            All Marquees (10)
+                        </button>
+                        <button type="button" class="filter-tab" data-filter="porsche" role="tab" aria-selected="false">
+                            Porsche (7)
+                        </button>
+                        <button type="button" class="filter-tab" data-filter="tesla" role="tab" aria-selected="false">
+                            Tesla (2)
+                        </button>
+                        <button type="button" class="filter-tab" data-filter="audi" role="tab" aria-selected="false">
+                            Audi (1)
+                        </button>
+                    </div>
+
+                    <div class="catalog-toolbar__right">
+                        <div class="search-input-wrap">
+                            <i class="ri-search-line search-icon" aria-hidden="true"></i>
+                            <input type="search" id="fleet-search" class="catalog-search" placeholder="Search model or spec..." aria-label="Search vehicles">
+                        </div>
+
+                        <div class="sort-select-wrap">
+                            <label for="fleet-sort" class="sr-only">Sort vehicles</label>
+                            <select id="fleet-sort" class="catalog-select">
+                                <option value="featured">Sort: Curated Order</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="accel-asc">0–100 km/h: Fastest First</option>
+                                <option value="range-desc">WLTP Range: Highest First</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Vehicle Grid rendered and hydrated cleanly -->
+                <div class="fleet__grid" id="fleet-grid">
+                    <!-- Populated via main.js with immediate initial HTML fallback below -->
+                </div>
+            </div>
+        </section>
+
+        <!--==================== 3. CORE ARCHITECTURE & PROOF BENTO GRID ====================-->
+        <section class="architecture section" id="architecture">
+            <div class="container">
+                <div class="section-header-row">
+                    <div>
+                        <p class="editorial-kicker">02. Platform Engineering &amp; Infrastructure</p>
+                        <h2 class="section-title">Machines Built on 800-Volt Architecture</h2>
+                    </div>
+                    <p class="section-subtitle">
+                        Higher system voltage reduces copper cabling mass by 32 kg while sustaining 270 kW+ peak charging power from 5% to 80% in 18 minutes.
+                    </p>
+                </div>
+
+                <div class="bento-grid">
+                    <!-- Bento Card 1: Span 7 - Interior & Charging Network -->
+                    <article class="bento-card bento-span-7">
+                        <div class="bento-card__content">
+                            <span class="editorial-index">01. Pan-European Ultra-Fast Corridor</span>
+                            <h3 class="bento-card__title">2,500+ High-Power Charging Stations Integrated Into Cockpit Navigation</h3>
+                            <p class="bento-card__text">
+                                Predictive thermal conditioning pre-heats or cools the lithium-ion pouch cells 20 minutes prior to arrival at any registered 350 kW Plug-and-Charge station.
+                            </p>
+                            <div class="proof-metrics-row">
+                                <div class="proof-metric">
+                                    <strong class="proof-metric__val tabular-nums">18 min</strong>
+                                    <span class="proof-metric__label">10% to 80% DC Charge Time</span>
+                                </div>
+                                <div class="proof-metric">
+                                    <strong class="proof-metric__val tabular-nums">99.4%</strong>
+                                    <span class="proof-metric__label">Verified Station Uptime (Q3)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bento-card__media">
+                            <img src="assets/img/about.png" alt="Futuristic electric vehicle cockpit interior" class="bento-about-img" referrerpolicy="no-referrer">
+                        </div>
+                    </article>
+
+                    <!-- Bento Card 2: Span 5 - Top-Down Chassis & Telemetry -->
+                    <article class="bento-card bento-span-5 bento-chassis">
+                        <div class="bento-card__header">
+                            <span class="editorial-index">02. Structural Battery &amp; Aero Chassis</span>
+                            <h3 class="bento-card__title">Low-Center-of-Gravity Skateboard Platform</h3>
+                        </div>
+
+                        <div class="chassis-showcase">
+                            <img src="assets/img/map.svg" alt="Global route telemetry map" class="chassis-map" referrerpolicy="no-referrer">
+                            <img src="assets/img/features.png" alt="Top view of electric vehicle chassis" class="chassis-car" referrerpolicy="no-referrer">
+
+                            <div class="chassis-callout callout-top-left">
+                                <strong class="tabular-nums">800V</strong>
+                                <span>Turbo Charging Bus</span>
+                            </div>
+                            <div class="chassis-callout callout-mid-right">
+                                <strong class="tabular-nums">350 kW</strong>
+                                <span>Peak Regeneration</span>
+                            </div>
+                            <div class="chassis-callout callout-bottom-left">
+                                <strong class="tabular-nums">480 km</strong>
+                                <span>Autobahn Range</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== 4. PORSCHE PERFORMANCE LINEUP SPOTLIGHT ====================-->
+        <section class="porsche-spotlight section" id="porsche-lineup">
+            <div class="container">
+                <div class="section-header-row">
+                    <div>
+                        <p class="editorial-kicker">03. Stuttgart Electric Lineage</p>
+                        <h2 class="section-title">Porsche Electric Performance Series</h2>
+                    </div>
+                    <div class="spotlight-controls">
+                        <button type="button" class="btn-icon" id="spotlight-prev" aria-label="Previous Porsche model">
+                            <i class="ri-arrow-left-line"></i>
+                        </button>
+                        <button type="button" class="btn-icon" id="spotlight-next" aria-label="Next Porsche model">
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="spotlight-track" id="spotlight-track">
+                    <!-- Populated from the 5 Porsche popular models with interactive selection -->
+                </div>
+            </div>
+        </section>
+
+        <!--==================== 5. PRIVATE CLIENT CONSULTATION & SPECIAL OFFERS ====================-->
+        <section class="consultation section" id="consultation">
+            <div class="container">
+                <div class="consultation__box">
+                    <img src="assets/img/offer-bg.png" alt="Dark studio background" class="consultation__bg" referrerpolicy="no-referrer">
+
+                    <div class="consultation__grid">
+                        <div class="consultation__info">
+                            <p class="editorial-kicker">04. Bespoke Acquisition &amp; Fleet Leasing</p>
+                            <h2 class="consultation__title">
+                                Schedule a Private Track Evaluation or Request Allocation
+                            </h2>
+                            <p class="consultation__desc">
+                                Receive build-slot availability, tailored corporate leasing terms, and direct invitations to closed-course driving evaluations.
+                            </p>
+
+                            <div class="consultation__vehicle-preview">
+                                <img src="assets/img/offer.png" alt="Porsche electric coupe side profile" class="consultation__car-img" referrerpolicy="no-referrer">
+                                <div class="unboxed-meta">
+                                    <span>Complimentary 3-Year Ionity Pass</span>
+                                    <span aria-hidden="true">·</span>
+                                    <span>8-Year / 160,000 km Battery Warranty</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="consultation__form-card">
+                            <form id="consultation-form" class="lead-form" novalidate>
+                                <h3 class="lead-form__title">Request Private Dossier &amp; Quote</h3>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="client-name" class="form-label">Full Name</label>
+                                        <input type="text" id="client-name" name="name" class="form-input" placeholder="e.g. Lukas Weber" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client-email" class="form-label">Work or Private Email</label>
+                                        <input type="email" id="client-email" name="email" class="form-input" placeholder="lukas@domain.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="client-model" class="form-label">Preferred Marque &amp; Model</label>
+                                        <select id="client-model" name="model" class="form-input">
+                                            <option value="Porsche Mission E">Porsche Mission E ($184,500)</option>
+                                            <option value="Porsche Taycan Turbo S">Porsche Taycan Turbo S ($175,900)</option>
+                                            <option value="Porsche Taycan 4S">Porsche Taycan ($114,900)</option>
+                                            <option value="Porsche Taycan Cross Turismo">Porsche Turbo S Cross ($150,900)</option>
+                                            <option value="Porsche Boxster 718 EV">Porsche Boxster 718 ($125,900)</option>
+                                            <option value="Porsche Cayman GT4 ePerformance">Porsche Cayman ($128,900)</option>
+                                            <option value="Tesla Model X Plaid">Tesla Model X ($98,900)</option>
+                                            <option value="Tesla Model 3 Performance">Tesla Model 3 ($45,900)</option>
+                                            <option value="Audi RS e-tron GT">Audi E-tron ($175,900)</option>
+                                            <option value="Porsche Panamera Turbo E-Hybrid">Porsche Panamera ($126,900)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="client-acquisition" class="form-label">Acquisition Method</label>
+                                        <select id="client-acquisition" name="acquisition" class="form-input">
+                                            <option value="Direct Purchase">Direct Purchase / Wire</option>
+                                            <option value="Executive Lease (36 Mo)">Executive Lease (36 Months)</option>
+                                            <option value="Corporate Fleet Allocation">Corporate Fleet Allocation</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="client-notes" class="form-label">Delivery Location or Configuration Notes (Optional)</label>
+                                    <input type="text" id="client-notes" name="notes" class="form-input" placeholder="Preferred delivery city or custom paint sample request">
+                                </div>
+
+                                <p class="form-error" id="form-error" role="alert" hidden></p>
+
+                                <button type="submit" class="btn-primary btn-full">
+                                    Request Manufacturing Quote &amp; Test Drive
+                                </button>
+
+                                <div class="form-success" id="form-success" hidden>
+                                    <div class="form-success__header">
+                                        <i class="ri-checkbox-circle-fill"></i>
+                                        <strong id="form-success-title">Allocation Dossier #EL-9042 Reserved</strong>
+                                    </div>
+                                    <p id="form-success-body">
+                                        Our Stuttgart Private Client desk has registered your inquiry and sent the build specification sheet.
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Authorized Marque Partners Bar -->
+                <div class="marque-logos" aria-label="Authorized Automotive Partners">
+                    <img src="assets/img/logo1.png" alt="Porsche" class="marque-logo" referrerpolicy="no-referrer">
+                    <img src="assets/img/logo2.png" alt="Audi" class="marque-logo" referrerpolicy="no-referrer">
+                    <img src="assets/img/logo3.png" alt="Tesla" class="marque-logo" referrerpolicy="no-referrer">
+                    <img src="assets/img/logo4.png" alt="Lamborghini" class="marque-logo" referrerpolicy="no-referrer">
+                    <img src="assets/img/logo5.png" alt="BMW" class="marque-logo" referrerpolicy="no-referrer">
+                    <img src="assets/img/logo6.png" alt="Mitsubishi" class="marque-logo" referrerpolicy="no-referrer">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== QUIET ARCHITECTURAL FOOTER ====================-->
+    <footer class="footer">
+        <div class="container footer__grid">
+            <div class="footer__brand">
+                <a href="#home" class="brand-wordmark">Elecar</a>
+                <p class="footer__summary">
+                    Authorized European electric performance showroom and bespoke vehicle configurator. Direct factory build slots for Porsche, Audi, and Tesla flagship electric vehicles.
+                </p>
+                <p class="unboxed-meta">
+                    <span>ISO 9001 Certified Delivery</span>
+                    <span aria-hidden="true">·</span>
+                    <span>Stuttgart</span>
+                    <span aria-hidden="true">·</span>
+                    <span>Zurich</span>
+                    <span aria-hidden="true">·</span>
+                    <span>Munich</span>
+                </p>
+            </div>
+
+            <div class="footer__col">
+                <h3 class="footer__heading">Showroom</h3>
+                <ul class="footer__links">
+                    <li><a href="#fleet" class="footer__link" data-quick-filter="porsche">Porsche Electric</a></li>
+                    <li><a href="#fleet" class="footer__link" data-quick-filter="tesla">Tesla Performance</a></li>
+                    <li><a href="#fleet" class="footer__link" data-quick-filter="audi">Audi e-tron Series</a></li>
+                    <li><a href="#porsche-lineup" class="footer__link">GT Track Editions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <h3 class="footer__heading">Engineering</h3>
+                <ul class="footer__links">
+                    <li><a href="#architecture" class="footer__link">800V Battery Platform</a></li>
+                    <li><a href="#architecture" class="footer__link">350 kW Charging Network</a></li>
+                    <li><a href="#consultation" class="footer__link">Corporate Fleet Leasing</a></li>
+                    <li><a href="#consultation" class="footer__link"> European Concierge</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <h3 class="footer__heading">Client Desk</h3>
+                <ul class="footer__links">
+                    <li><a href="#consultation" class="footer__link">Book Track Evaluation</a></li>
+                    <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="footer__link">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/" target="_blank" rel="noreferrer" class="footer__link">Instagram</a></li>
+                    <li><a href="https://twitter.com/" target="_blank" rel="noreferrer" class="footer__link">X / Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer__bottom">
+            <span>&#169; 2026 Elecar Automotive Group. All rights reserved.</span>
+            <div class="unboxed-meta">
+                <span>WLTP Telemetry Certified</span>
+                <span aria-hidden="true">·</span>
+                <span>Privacy Policy</span>
+                <span aria-hidden="true">·</span>
+                <span>Terms of Allocation</span>
+            </div>
+        </div>
+    </footer>
+
+    <!--==================== CONTIGUOUS VEHICLE CONFIGURATOR MODAL ====================-->
+    <div class="modal-backdrop" id="config-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-car-title">
+        <div class="modal-panel">
+            <div class="modal-header">
+                <div class="unboxed-meta">
+                    <span id="modal-car-brand">Porsche</span>
+                    <span aria-hidden="true">·</span>
+                    <span id="modal-car-category">800V Electric Performance</span>
+                </div>
+                <button type="button" class="btn-icon modal-close" id="close-modal-btn" aria-label="Close configurator">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Left Column: Visual & Telemetry Specs -->
+                <div class="modal-gallery">
+                    <div class="modal-img-stage">
+                        <img src="assets/img/popular1.png" alt="Selected vehicle" id="modal-car-img" class="modal-car-img" referrerpolicy="no-referrer">
+                    </div>
+
+                    <div class="modal-specs-grid">
+                        <div class="modal-spec-box">
+                            <span class="spec-label">0–100 km/h</span>
+                            <strong class="spec-val tabular-nums" id="modal-spec-accel">3.7 Sec</strong>
+                        </div>
+                        <div class="modal-spec-box">
+                            <span class="spec-label">Top Speed</span>
+                            <strong class="spec-val tabular-nums" id="modal-spec-speed">356 km/h</strong>
+                        </div>
+                        <div class="modal-spec-box">
+                            <span class="spec-label">WLTP Range</span>
+                            <strong class="spec-val tabular-nums" id="modal-spec-range">484 km</strong>
+                        </div>
+                        <div class="modal-spec-box">
+                            <span class="spec-label">Architecture</span>
+                            <strong class="spec-val tabular-nums" id="modal-spec-power">800V DC</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Contiguous Purchase & Trim Configurator -->
+                <div class="modal-purchase">
+                    <h2 class="modal-title" id="modal-car-title">Porsche Turbo S</h2>
+                    <p class="modal-desc" id="modal-car-desc">
+                        Dual-motor permanent magnet synchronous propulsion with active torque vectoring and carbon-ceramic braking system.
+                    </p>
+
+                    <div class="config-section">
+                        <span class="config-label">01. Select Exterior Finish</span>
+                        <div class="config-options" id="config-paint-options">
+                            <button type="button" class="config-choice active" data-paint="Obsidian Metallic" data-cost="0">
+                                Obsidian Metallic (+$0)
+                            </button>
+                            <button type="button" class="config-choice" data-paint="Ice Grey Satin" data-cost="3400">
+                                Ice Grey Satin (+$3,400)
+                            </button>
+                            <button type="button" class="config-choice" data-paint="Cobalt Racing Blue" data-cost="4800">
+                                Cobalt Blue (+$4,800)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="config-section">
+                        <span class="config-label">02. Battery &amp; Performance Package</span>
+                        <div class="config-options" id="config-pack-options">
+                            <button type="button" class="config-choice active" data-pack="Performance Battery Plus (93.4 kWh)" data-cost="0">
+                                Performance Plus 93.4 kWh (+$0)
+                            </button>
+                            <button type="button" class="config-choice" data-pack="Weissach Track Telemetry &amp; Aero" data-cost="11500">
+                                Track Aero Pack (+$11,500)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="modal-pricing-summary">
+                        <div class="price-row">
+                            <span>Configured Total Price</span>
+                            <strong class="price-total tabular-nums" id="modal-total-price">$175,900</strong>
+                        </div>
+                        <div class="price-row price-row--sub">
+                            <span>Estimated 36-Month Executive Lease</span>
+                            <span class="tabular-nums" id="modal-lease-price">$2,190 / mo</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-primary btn-full" id="modal-add-garage-btn">
+                            Save Configuration to Garage
+                        </button>
+                        <button type="button" class="btn-outline btn-full" id="modal-book-drive-btn">
+                            Schedule Private Evaluation for This Model
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--==================== SAVED GARAGE / RESERVATION DRAWER ====================-->
+    <div class="drawer-backdrop" id="garage-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="garage-drawer-title">
+        <div class="drawer-panel">
+            <div class="drawer-header">
+                <div>
+                    <h2 class="drawer-title" id="garage-drawer-title">Saved Fleet Garage</h2>
+                    <p class="drawer-subtitle">Configured build slots &amp; side-by-side summary</p>
+                </div>
+                <button type="button" class="btn-icon" id="close-garage-btn" aria-label="Close garage drawer">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <div class="drawer-body" id="garage-items-container">
+                <!-- Populated dynamically -->
+            </div>
+
+            <div class="drawer-footer" id="garage-footer">
+                <div class="drawer-total-row">
+                    <span>Combined Fleet Allocation Value</span>
+                    <strong class="tabular-nums" id="garage-total-price">$0</strong>
+                </div>
+                <button type="button" class="btn-primary btn-full" id="garage-checkout-btn">
+                    Proceed to Allocation Inquiry
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
